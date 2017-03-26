@@ -1,14 +1,14 @@
-angular.module('invoice1', ['finance2'])
+angular.module('invoice1', ['finance3'])
 
-.controller('InvoiceController', ['Converter', function InvoiceController(Converter) {
+.controller('InvoiceController', ['YahooFinance', function InvoiceController(YahooFinance) {
 
   this.qty = 1;
   this.cost = 2;
   this.inCurr = 'EUR';
-  this.currencies = Converter.currencies;
+  this.currencies = YahooFinance.currencies;
 
   this.total = function total(outCurr) {
-    return Converter.convert(this.qty * this.cost, this.inCurr, outCurr);
+    return YahooFinance.convert(this.qty * this.cost, this.inCurr, outCurr);
   };
 
   this.pay = function pay() {

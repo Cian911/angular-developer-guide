@@ -5,3 +5,4 @@ NOTE*: The only place where an application should access the DOM is within direc
 
 {{}} - This is called an angular experssion
 
+NOTE*: Everything in Angular is created and wired using dependency injection. This is done through "modules".
