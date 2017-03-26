@@ -1,27 +1,18 @@
-angular.module('invoice1', [])
+angular.module('invoice1', ['finance2'])
 
-.controller('InvoiceController', function() {
+.controller('InvoiceController', ['Converter', function InvoiceController(Converter) {
 
   this.qty = 1;
   this.cost = 2;
   this.inCurr = 'EUR';
-  this.currencies = ['USD', 'EUR', 'GBP'];
-  this.usdToForeignRates = {
-    USD: 1,
-    EUR: 0.74,
-    GBP: 1.30
+  this.currencies = Converter.currencies;
+
+  this.total = function total(outCurr) {
+    return Converter.convert(this.qty * this.cost, this.inCurr, outCurr);
   };
 
-  this.total = function( outCurr ) {
-    return this.covertCurrency(this.qty * this.cost, this.inCurr, outCurr);
+  this.pay = function pay() {
+    window.alert('Thanks, your payment was successfull!');
   };
 
-  this.covertCurrency = function( amount, inCurr, outCurr ) {
-    return amount * this.usdToForeignRates[outCurr] / this.usdToForeignRates[inCurr];
-  };
-
-  this.pay = function() {
-    window.alert('Thanks, payment was successful!');
-  };
-
-});
+}]);
